@@ -1,0 +1,26 @@
+settings:
+  legacy:
+    force: false
+    interval: 0s
+schema:
+- name: /go/src/github.com/Amakuchisan/QuestionBox
+  path: /go/src/github.com/Amakuchisan/QuestionBox
+  commands:
+    install:
+      status: true
+      method: go build -o /go/src/github.com/Amakuchisan/QuestionBox/bin/tts
+    run:
+      status: true
+      method: /go/src/github.com/Amakuchisan/QuestionBox/bin/tts
+  watcher:
+    extensions:
+    - go
+    - html
+    - css
+    - js
+    paths:
+    - /
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor

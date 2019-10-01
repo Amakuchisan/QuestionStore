@@ -1,17 +1,22 @@
-version: '3'
+version: '3.5'
 
 services:
   app:
     container_name: tts-container
     tty: true
     stdin_open: true
-    build: .
+    build:
+      context: .
+      target: builder
+    command: realize start --run
     ports:
       - "1323:1323"
     depends_on:
       - db
     links:
       - db
+    volumes:
+      - ./:/go/src/github.com/Amakuchisan/QuestionBox
 
   db:
     container_name: mysql-container
