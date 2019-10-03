@@ -32,7 +32,7 @@ func main() {
 	e.Renderer = &TemplateRegistry{
 		templates: templates,
 	}
-	e.GET("/", handler.MainPage).Name = "main"
+	e.GET("/", handler.MainPage)
 	e.GET("/users", handler.UsersPage)
 	e.Logger.Fatal(e.Start(":1323"))
 }
