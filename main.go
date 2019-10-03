@@ -25,6 +25,7 @@ func (t *TemplateRegistry) Render(w io.Writer, name string, data interface{}, c 
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
+	e.Static("/static", "static")
 
 	templates := make(map[string]*template.Template)
 	templates["index.html"] = template.Must(template.ParseFiles("templates/index.html", "templates/layout.html"))
