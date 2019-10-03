@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"html/template"
 	"io"
+	"path/filepath"
 )
 
 type TemplateRegistry struct {
@@ -28,11 +29,21 @@ func main() {
 	e.Static("/static", "static")
 
 	templates := make(map[string]*template.Template)
-	templates["index.html"] = template.Must(template.ParseFiles("templates/index.html", "templates/layout.html"))
+	templates["index.html"] = makeTemplate("index.html")
 	e.Renderer = &TemplateRegistry{
 		templates: templates,
 	}
 	e.GET("/", handler.MainPage)
 	e.GET("/users", handler.UsersPage)
 	e.Logger.Fatal(e.Start(":1323"))
+}
+
+const (
+	baseTemplate = "templates/layout.html"
+	templatesDir = "templates"
+)
+
+func makeTemplate(html string) *template.Template {
+	templateFile := filepath.Join(templatesDir, html)
+	return template.Must(template.ParseFiles(baseTemplate, templateFile))
 }
