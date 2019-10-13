@@ -10,10 +10,6 @@ import (
 	"os"
 )
 
-const (
-	googleCallbackURL = "http://localhost:1323/auth/callback/google"
-)
-
 func main() {
 
 	if os.Getenv("QS_ENV") == "development" {
@@ -27,6 +23,8 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Static("/static", "static")
 
+	host := os.Getenv("QS_HOST")
+	googleCallbackURL = fmt.Sprintf("http://%s/auth/callback/google", host)
 	// setup gomniauth
 	gomniauth.SetSecurityKey(os.Getenv("SECURITY_KEY"))
 	gomniauth.WithProviders(
