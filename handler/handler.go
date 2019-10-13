@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"log"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 	"net/http"
 	"time"
+	"log"
 )
 
 const (
