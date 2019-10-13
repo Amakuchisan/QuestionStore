@@ -27,7 +27,7 @@ func GetDBSession() *sqlx.DB {
 	var err error
 	// dbConf := getDBConfig()
 	DB, err = sqlx.Open(dbDriver, dataSource)
-	
+
 	if err != nil {
 		log.Fatal("failed to connect db", err)
 	}
