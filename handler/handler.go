@@ -12,10 +12,10 @@ import (
 )
 
 const (
-	DB_DRIVER = "mysql"
+	dbDriver = "mysql"
 
 	// TODO: read from environment values
-	DATA_SOURCE = "tts:tts@tcp(mysql-container:3306)/tts?parseTime=true"
+	dataSource = "tts:tts@tcp(mysql-container:3306)/tts?parseTime=true"
 )
 
 var db *sql.DB
@@ -30,7 +30,7 @@ type User struct {
 
 func init() {
 	var err error
-	db, err = sql.Open(DB_DRIVER, DATA_SOURCE)
+	db, err = sql.Open(dbDriver, dataSource)
 
 	if err != nil {
 		log.Fatal("failed to connect db", err)
