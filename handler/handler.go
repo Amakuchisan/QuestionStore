@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
+	"log"
 	"net/http"
 	"time"
-	"log"
 )
 
 const (
@@ -84,8 +84,11 @@ func CallbackHandler(c echo.Context) error {
 	}
 
 	omap, err := objx.FromURLQuery(c.QueryString())
-	creds, err := provider.CompleteAuth(omap)
+	if err != nil {
+		return err
+	}
 
+	creds, err := provider.CompleteAuth(omap)
 	if err != nil {
 		return err
 	}
