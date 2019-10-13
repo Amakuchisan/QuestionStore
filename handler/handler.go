@@ -2,6 +2,7 @@ package handler
 
 import (
 	"database/sql"
+	// MySQL Driver
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 	"github.com/stretchr/gomniauth"
@@ -20,6 +21,7 @@ const (
 
 var db *sql.DB
 
+// User -- This is user model
 type User struct {
 	ID        uint64
 	Name      string

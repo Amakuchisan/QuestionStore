@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/Amakuchisan/QuestionBox/route"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/middleware"
@@ -8,7 +9,6 @@ import (
 	"github.com/stretchr/gomniauth/providers/google"
 	"log"
 	"os"
-	"fmt"
 )
 
 func main() {
