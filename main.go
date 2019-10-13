@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/gomniauth/providers/google"
 	"log"
 	"os"
+	"fmt"
 )
 
 func main() {
@@ -24,7 +25,7 @@ func main() {
 	e.Static("/static", "static")
 
 	host := os.Getenv("QS_HOST")
-	googleCallbackURL = fmt.Sprintf("http://%s/auth/callback/google", host)
+	googleCallbackURL := fmt.Sprintf("http://%s/auth/callback/google", host)
 	// setup gomniauth
 	gomniauth.SetSecurityKey(os.Getenv("SECURITY_KEY"))
 	gomniauth.WithProviders(
