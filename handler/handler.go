@@ -97,9 +97,6 @@ func CallbackHandler(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	// Debug
-	// 	fmt.Printf("%v", user)
-	// 	fmt.Printf("%s, %s, %s", user.Nickname(), user.Email(), user.AvatarURL())
-	log.Println(user.Email())
+
 	return c.JSON(http.StatusOK, user)
 }
