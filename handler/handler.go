@@ -37,12 +37,14 @@ func init() {
 	}
 }
 
+// MainPage -- top page
 func MainPage(c echo.Context) error {
 	return c.Render(http.StatusOK, "index.html", map[string]interface{}{
 		"name": "Dolly!",
 	})
 }
 
+// UsersPage -- user page
 func UsersPage(c echo.Context) error {
 	rows, err := db.Query("SELECT * from users;")
 	if err != nil {
@@ -64,6 +66,7 @@ func UsersPage(c echo.Context) error {
 	return c.JSON(http.StatusOK, users)
 }
 
+// LoginHandler -- Login to each provider
 func LoginHandler(c echo.Context) error {
 	provider, err := gomniauth.Provider(c.Param("provider"))
 	if err != nil {
@@ -79,6 +82,7 @@ func LoginHandler(c echo.Context) error {
 
 }
 
+// CallbackHandler -- Provider called this handler after login
 func CallbackHandler(c echo.Context) error {
 	provider, err := gomniauth.Provider(c.Param("provider"))
 	if err != nil {
