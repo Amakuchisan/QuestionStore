@@ -11,6 +11,8 @@ services:
     command: realize start --run
     ports:
       - "1323:1323"
+    environment:
+      QS_ENV: development
     depends_on:
       - db
     links:

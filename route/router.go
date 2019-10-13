@@ -35,6 +35,8 @@ func Init() *echo.Echo {
 
 	e.GET("/", handler.MainPage)
 	e.GET("/users", handler.UsersPage)
+	e.GET("/auth/login/:provider", handler.LoginHandler)
+	e.GET("/auth/callback/:provider", handler.CallbackHandler)
 
 	return e
 }
