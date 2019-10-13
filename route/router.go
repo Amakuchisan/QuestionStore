@@ -9,10 +9,12 @@ import (
 	"path/filepath"
 )
 
+// TemplateRegistry -- This have all templates
 type TemplateRegistry struct {
 	templates map[string]*template.Template
 }
 
+// Render -- Rendering templates
 func (t *TemplateRegistry) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	tmpl, ok := t.templates[name]
 	if !ok {

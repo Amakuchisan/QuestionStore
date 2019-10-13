@@ -2,22 +2,26 @@ package handler
 
 import (
 	"database/sql"
+	// MySQL Driver
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
+	"github.com/stretchr/gomniauth"
+	"github.com/stretchr/objx"
 	"log"
 	"net/http"
 	"time"
 )
 
 const (
-	DB_DRIVER = "mysql"
+	dbDriver = "mysql"
 
 	// TODO: read from environment values
-	DATA_SOURCE = "tts:tts@tcp(mysql-container:3306)/tts?parseTime=true"
+	dataSource = "tts:tts@tcp(mysql-container:3306)/tts?parseTime=true"
 )
 
 var db *sql.DB
 
+// User -- This is user model
 type User struct {
 	ID        uint64
 	Name      string
@@ -28,19 +32,21 @@ type User struct {
 
 func init() {
 	var err error
-	db, err = sql.Open(DB_DRIVER, DATA_SOURCE)
+	db, err = sql.Open(dbDriver, dataSource)
 
 	if err != nil {
 		log.Fatal("failed to connect db", err)
 	}
 }
 
+// MainPage -- top page
 func MainPage(c echo.Context) error {
 	return c.Render(http.StatusOK, "index.html", map[string]interface{}{
 		"name": "Dolly!",
 	})
 }
 
+// UsersPage -- user page
 func UsersPage(c echo.Context) error {
 	rows, err := db.Query("SELECT * from users;")
 	if err != nil {
@@ -62,6 +68,7 @@ func UsersPage(c echo.Context) error {
 	return c.JSON(http.StatusOK, users)
 }
 
+// LoginHandler -- Login to each provider
 func LoginHandler(c echo.Context) error {
 	provider, err := gomniauth.Provider(c.Param("provider"))
 	if err != nil {
@@ -77,6 +84,7 @@ func LoginHandler(c echo.Context) error {
 
 }
 
+// CallbackHandler -- Provider called this handler after login
 func CallbackHandler(c echo.Context) error {
 	provider, err := gomniauth.Provider(c.Param("provider"))
 	if err != nil {

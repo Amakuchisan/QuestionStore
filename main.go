@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/Amakuchisan/QuestionBox/route"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/middleware"
@@ -24,7 +25,7 @@ func main() {
 	e.Static("/static", "static")
 
 	host := os.Getenv("QS_HOST")
-	googleCallbackURL = fmt.Sprintf("http://%s/auth/callback/google", host)
+	googleCallbackURL := fmt.Sprintf("http://%s/auth/callback/google", host)
 	// setup gomniauth
 	gomniauth.SetSecurityKey(os.Getenv("SECURITY_KEY"))
 	gomniauth.WithProviders(
