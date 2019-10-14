@@ -3,7 +3,7 @@ settings:
     force: false
     interval: 0s
 schema:
-- name: /go/src/github.com/Amakuchisan/QuestionBox
+- name: QuestionBox
   path: /go/src/github.com/Amakuchisan/QuestionBox
   commands:
     install:
