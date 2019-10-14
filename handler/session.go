@@ -27,7 +27,6 @@ func LoginHandler(c echo.Context) error {
 
 // CallbackHandler -- Provider called this handler after login
 func (u *userHandler) CallbackHandler(c echo.Context) error {
-	// func CallbackHandler(c echo.Context) error {
 	provider, err := gomniauth.Provider(c.Param("provider"))
 	if err != nil {
 		return err
@@ -57,7 +56,6 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		}
 	}
 
-	// return c.JSON(http.StatusOK, user)
 	authCookieValue := objx.New(map[string]interface{}{
 		"name": user.Name(),
 	}).MustBase64()
