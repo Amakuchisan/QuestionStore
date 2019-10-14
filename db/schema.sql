@@ -1,5 +1,6 @@
 CREATE TABLE user (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    email VARCHAR(256) NOT NULL UNIQUE,
     name VARCHAR(32),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -18,6 +19,6 @@ CREATE TABLE question (
 );
 
 -- 初期データ
-INSERT INTO user (name) VALUES ("hoge");
-INSERT INTO user (name) VALUES ("foo");
-INSERT INTO user (name) VALUES ("bar");
+INSERT INTO user (email, name) VALUES ("hoge@hogehoge", "hoge");
+INSERT INTO user (email, name) VALUES ("fuga@fugafuga", "foo");
+INSERT INTO user (email, name) VALUES ("piyo@piyopiyo", "bar");

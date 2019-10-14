@@ -24,3 +24,9 @@ func (u *UserModel) All() ([]model.User, error) {
 	}
 	return users, nil
 }
+
+// Create -- INSERT user
+func (u *UserModel) Create(user *model.User) error {
+	_, err := u.db.Exec(`INSERT INTO user (name, email) VALUES (?, ?)`, user.Name, user.Email)
+	return err
+}
