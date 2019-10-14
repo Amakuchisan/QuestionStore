@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/Amakuchisan/QuestionBox/database"
 	"github.com/Amakuchisan/QuestionBox/model"
 	"github.com/labstack/echo"
 	"github.com/stretchr/gomniauth"
@@ -16,10 +15,26 @@ func MainPage(c echo.Context) error {
 	})
 }
 
+type (
+	userHandler struct {
+		userModel model.UserModelImpl
+	}
+	// UserHandleImplement -- Define handler about users
+	UserHandleImplement interface {
+		UsersPage(c echo.Context) error
+	}
+)
+
+// NewUserHandler -- Initialize handler about user
+func NewUserHandler(userModel model.UserModelImpl) UserHandleImplement {
+	return &userHandler{userModel}
+}
+
 // UsersPage -- user page
-func UsersPage(c echo.Context) error {
-	users := []model.User{}
-	err := database.DB.Select(&users, "SELECT * from user")
+func (u *userHandler) UsersPage(c echo.Context) error {
+	// users := []model.User{}
+	users, err := u.userModel.All()
+	// err := database.DB.Select(&users, "SELECT * from user")
 	if err != nil {
 		return err
 	}

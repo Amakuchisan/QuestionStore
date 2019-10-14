@@ -17,13 +17,12 @@ const (
 // DB -- refered handler
 var DB *sqlx.DB
 
-// Init -- 自動でinitされると困るから静的に呼び出す
 func init() {
-	DB = GetDBSession()
+	DB = getDBSession()
 }
 
-// GetDBSession is return db connection
-func GetDBSession() *sqlx.DB {
+// GetDBSession -- return db connection
+func getDBSession() *sqlx.DB {
 	var err error
 	// dbConf := getDBConfig()
 	DB, err = sqlx.Open(dbDriver, dataSource)
