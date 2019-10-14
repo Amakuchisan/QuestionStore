@@ -18,6 +18,7 @@ type User struct {
 type UserModelImpl interface {
 	All() ([]User, error)
 	Create(user *User) error
+	FindByEmail(email string) (*User, error)
 	// Delete(user *User) error
 	// FindByID(id uint) (User, error)
 }
