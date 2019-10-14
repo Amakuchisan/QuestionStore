@@ -21,7 +21,7 @@ type (
 	}
 	// UserHandleImplement -- Define handler about users
 	UserHandleImplement interface {
-		UsersPage(c echo.Context) error
+		UserAll(c echo.Context) error
 	}
 )
 
