@@ -30,8 +30,8 @@ func NewUserHandler(userModel model.UserModelImpl) UserHandleImplement {
 	return &userHandler{userModel}
 }
 
-// UsersPage -- user page
-func (u *userHandler) UsersPage(c echo.Context) error {
+// UserAll -- user page
+func (u *userHandler) UserAll(c echo.Context) error {
 	// users := []model.User{}
 	users, err := u.userModel.All()
 	// err := database.DB.Select(&users, "SELECT * from user")

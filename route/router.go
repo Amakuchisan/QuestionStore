@@ -38,12 +38,11 @@ func Init() *echo.Echo {
 	}
 
 	e.GET("/", handler.MainPage)
-	// e.GET("/users", handler.UsersPage)
 	e.GET("/auth/login/:provider", handler.LoginHandler)
 	e.GET("/auth/callback/:provider", handler.CallbackHandler)
 
 	userHandler := handler.NewUserHandler(model.NewUserModel(database.DB))
-	e.GET("/users", userHandler.UsersPage)
+	e.GET("/users", userHandler.UserAll)
 	// e.POST("/users", userHandler.CreateUser)
 	// e.GET("/users/:id", userHandler.DetailUser)
 	// e.DELETE("/users/:id", userHandler.DeleteUser)
