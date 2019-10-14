@@ -24,3 +24,16 @@ func (u *UserModel) All() ([]model.User, error) {
 	}
 	return users, nil
 }
+
+// Create -- INSERT user
+func (u *UserModel) Create(user *model.User) error {
+	_, err := u.db.Exec(`INSERT INTO user (name, email) VALUES (?, ?)`, user.Name, user.Email)
+	return err
+}
+
+// FindByEmail -- find user in database
+func (u *UserModel) FindByEmail(email string) (*model.User, error) {
+	user := model.User{}
+	err := u.db.Select(&user, "SELECT * from user WHERE email = ? LIMIT 1", email)
+	return &user, err
+}

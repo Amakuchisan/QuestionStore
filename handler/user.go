@@ -13,6 +13,7 @@ type (
 	// UserHandleImplement -- Define handler about users
 	UserHandleImplement interface {
 		UserAll(c echo.Context) error
+		CallbackHandler(c echo.Context) error
 	}
 )
 
