@@ -2,7 +2,6 @@ package handler
 
 import (
 	"github.com/Amakuchisan/QuestionBox/model"
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/objx"
@@ -80,9 +79,5 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 }
 
 func checkDomain(email string) bool {
-	if os.Getenv("QS_ENV") == "development" {
-		godotenv.Load()
-	}
-	authorized := strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
-	return authorized
+	return strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
 }
