@@ -49,8 +49,8 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		return err
 	}
 
-	authorize := checkDomain(user.Email())
-	if !authorize {
+	authorized := checkDomain(user.Email())
+	if !authorized {
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
