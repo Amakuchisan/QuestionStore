@@ -2,10 +2,13 @@ package handler
 
 import (
 	"github.com/Amakuchisan/QuestionBox/model"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/objx"
 	"net/http"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -47,6 +50,11 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		return err
 	}
 
+	authorize := checkDomain(user.Email())
+	if !authorize {
+		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
+	}
+
 	usr, err := u.userModel.FindByEmail(user.Email())
 	if err != nil && usr == nil {
 		usr := model.User{Name: user.Name(), Email: user.Email()}
@@ -69,4 +77,12 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 	c.SetCookie(cookie)
 
 	return c.Redirect(http.StatusMovedPermanently, "/")
+}
+
+func checkDomain(email string) bool {
+	if os.Getenv("QS_ENV") == "development" {
+		godotenv.Load()
+	}
+	authorized := strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
+	return authorized
 }
