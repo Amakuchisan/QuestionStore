@@ -54,8 +54,9 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
-	usr, err := u.userModel.FindByEmail(user.Email())
-	if err != nil && usr == nil {
+	_, err = u.userModel.FindByEmail(user.Email())
+
+	if err != nil {
 		usr := model.User{Name: user.Name(), Email: user.Email()}
 		err = u.userModel.Create(&usr)
 		if err != nil {

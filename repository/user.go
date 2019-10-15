@@ -34,6 +34,6 @@ func (u *UserModel) Create(user *model.User) error {
 // FindByEmail -- find user in database
 func (u *UserModel) FindByEmail(email string) (*model.User, error) {
 	user := model.User{}
-	err := u.db.Select(&user, "SELECT * from user WHERE email = ? LIMIT 1", email)
+	err := u.db.Get(&user, "SELECT * from user WHERE email = ? LIMIT 1", email)
 	return &user, err
 }
