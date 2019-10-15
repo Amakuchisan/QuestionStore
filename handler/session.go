@@ -6,6 +6,8 @@ import (
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/objx"
 	"net/http"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -47,8 +49,14 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		return err
 	}
 
-	usr, err := u.userModel.FindByEmail(user.Email())
-	if err != nil && usr == nil {
+	if isAuthorizedDomain(user.Email()) {
+		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
+	}
+
+	// This function search whether login user is existed.
+	_, err = u.userModel.FindByEmail(user.Email())
+
+	if err != nil {
 		usr := model.User{Name: user.Name(), Email: user.Email()}
 		err = u.userModel.Create(&usr)
 		if err != nil {
@@ -69,4 +77,8 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 	c.SetCookie(cookie)
 
 	return c.Redirect(http.StatusMovedPermanently, "/")
+}
+
+func isAuthorizedDomain(email string) bool {
+	return strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
 }
