@@ -49,8 +49,7 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		return err
 	}
 
-	authorized := checkDomain(user.Email())
-	if !authorized {
+	if isAuthorizedDomain(user.Email()) {
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
@@ -79,6 +78,6 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 	return c.Redirect(http.StatusMovedPermanently, "/")
 }
 
-func checkDomain(email string) bool {
+func isAuthorizedDomain(email string) bool {
 	return strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
 }
