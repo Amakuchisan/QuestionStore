@@ -53,6 +53,7 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
+	// This function search whether login user is existed.
 	_, err = u.userModel.FindByEmail(user.Email())
 
 	if err != nil {
