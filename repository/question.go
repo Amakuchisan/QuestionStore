@@ -3,7 +3,6 @@ package repository
 import (
 	"github.com/Amakuchisan/QuestionBox/model"
 	"github.com/jmoiron/sqlx"
-	// "log"
 )
 
 // QuestionModel -- have method about user table in database
