@@ -1,0 +1,11 @@
+{{define "title"}}
+    Question
+{{end}}
+
+{{define "content"}}
+    {{range .question}}
+    <p>
+    {{.Title}}
+    </p>
+    {{end}}
+{{end}}
