@@ -1,9 +1,13 @@
 ##  Building Stage
 FROM golang:1.13.0-alpine as builder
 
-RUN apk add --no-cache make git \
-  && go get github.com/oxequa/realize
+ENV LANG en_US.UTF-8
 
+RUN apk add --update --no-cache make git tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    echo "Asia/Tokyo" > /etc/timezone && \
+    apk del tzdata && \
+    go get github.com/oxequa/realize
 
 WORKDIR /go/src/github.com/Amakuchisan/QuestionBox
 COPY go.mod go.mod
@@ -16,7 +20,15 @@ RUN make build
 ## Running Stage
 
 FROM alpine:3.10.2
+
+ENV LANG en_US.UTF-8
+RUN apk add --update --no-cache tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    echo "Asia/Tokyo" > /etc/timezone && \
+    apk del tzdata
+
 WORKDIR /app
+
 COPY --from=builder /go/src/github.com/Amakuchisan/QuestionBox/bin/tts /app/tts
 # Template files
 COPY --from=builder /go/src/github.com/Amakuchisan/QuestionBox/templates/ /app/templates
