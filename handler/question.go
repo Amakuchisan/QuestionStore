@@ -24,6 +24,11 @@ func NewQuestionHandler(questionModel model.QuestionModelImpl) QuestionHandleImp
 
 // QuestionsPage -- list questions
 func (q *questionHandler) QuestionsPage(c echo.Context) error {
+	// This function check whether cookie exist.
+	_, err := c.Cookie("auth")
+	if err != nil {
+		return c.Redirect(http.StatusMovedPermanently, "/auth/login/google")
+	}
 	questions, err := q.questionModel.All()
 	if err != nil {
 		return err
