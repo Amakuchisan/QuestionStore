@@ -2,6 +2,14 @@
 
 This is a bulletin board format Web application. Users post questions and comments on questions.
 
+[![CircleCI](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master.svg?style=svg)](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master)
+
+## Overview
+
+- Login with OAuth2 with Google
+- Post questions
+- Post comments on questions
+
 ## Dependencies
 
 - Go: 1.13.0
@@ -22,26 +30,10 @@ $ make build
 $ ./bin/tts
 ```
 
-## Use Docker Compose
+## Launch local environment
 
-**Build**
-```
-$ docker-compose build
-```
-
-**Launch**
 ```
 $ docker-compose up -d
-```
-
-**Down**
-```
-$ docker-compose down
-```
-
-**Logging**
-```
-$ docker-compose logs -f
 ```
 
 **Execute SQL**
@@ -49,4 +41,6 @@ $ docker-compose logs -f
 $ docker-compose exec db mysql -h localhost -u tts -p tts
 ```
 
-[![CircleCI](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master.svg?style=svg)](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master)
+## Future work
+
+- Use Nginx
