@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/Amakuchisan/QuestionBox/model"
+	"github.com/Amakuchisan/QuestionStore/model"
 	"github.com/jmoiron/sqlx"
 )
 

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	_ "github.com/Amakuchisan/QuestionBox/database"
-	"github.com/Amakuchisan/QuestionBox/route"
+	_ "github.com/Amakuchisan/QuestionStore/database"
+	"github.com/Amakuchisan/QuestionStore/route"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/middleware"
 	"github.com/stretchr/gomniauth"

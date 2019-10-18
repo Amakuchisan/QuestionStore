@@ -11,7 +11,7 @@ const (
 	dbDriver = "mysql"
 
 	// TODO: read from environment values
-	dataSource = "tts:tts@tcp(mysql-container:3306)/tts?parseTime=true"
+	dataSource = "qs:qs@tcp(mysql-container:3306)/qs?parseTime=true"
 )
 
 // DB -- refered handler

@@ -1,4 +1,4 @@
-module github.com/Amakuchisan/QuestionBox
+module github.com/Amakuchisan/QuestionStore
 
 go 1.13
 

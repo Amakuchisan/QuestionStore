@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   app:
-    container_name: tts-container
+    container_name: qs-container
     tty: true
     stdin_open: true
     build:
@@ -18,16 +18,16 @@ services:
     links:
       - db
     volumes:
-      - ./:/go/src/github.com/Amakuchisan/QuestionBox
+      - ./:/go/src/github.com/Amakuchisan/QuestionStore
 
   db:
     container_name: mysql-container
     image: mysql:8.0.17
     environment:
-      MYSQL_ROOT_PASSWORD: tts
-      MYSQL_USER: tts
-      MYSQL_PASSWORD: tts
-      MYSQL_DATABASE: tts
+      MYSQL_ROOT_PASSWORD: qs
+      MYSQL_USER: qs
+      MYSQL_PASSWORD: qs
+      MYSQL_DATABASE: qs
     ports:
        - "3306:3306"
     healthcheck:

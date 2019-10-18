@@ -9,7 +9,7 @@ RUN apk add --update --no-cache make git tzdata && \
     apk del tzdata && \
     go get github.com/oxequa/realize
 
-WORKDIR /go/src/github.com/Amakuchisan/QuestionBox
+WORKDIR /go/src/github.com/Amakuchisan/QuestionStore
 COPY go.mod go.mod
 COPY go.sum go.sum
 RUN go mod download
@@ -29,10 +29,10 @@ RUN apk add --update --no-cache tzdata && \
 
 WORKDIR /app
 
-COPY --from=builder /go/src/github.com/Amakuchisan/QuestionBox/bin/tts /app/tts
+COPY --from=builder /go/src/github.com/Amakuchisan/QuestionStore/bin/qs /app/qs
 # Template files
-COPY --from=builder /go/src/github.com/Amakuchisan/QuestionBox/templates/ /app/templates
+COPY --from=builder /go/src/github.com/Amakuchisan/QuestionStore/templates/ /app/templates
 # Static files (js|css|img)
-COPY --from=builder /go/src/github.com/Amakuchisan/QuestionBox/static/ /app/static
+COPY --from=builder /go/src/github.com/Amakuchisan/QuestionStore/static/ /app/static
 
-CMD /app/tts
+CMD /app/qs

@@ -6,7 +6,7 @@ jobs:
         GO111MODULE: "on"
     docker:
       - image: circleci/golang:1.13.0
-    working_directory: /home/circleci/go/src/github.com/Amakuchisan/QuestionBox
+    working_directory: /home/circleci/go/src/github.com/Amakuchisan/QuestionStore
     steps:
       - run: echo 'export PATH=${GOPATH}/bin/:${PATH}' >> $BASH_ENV
       - run: echo $GOPATH

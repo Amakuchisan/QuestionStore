@@ -3,15 +3,15 @@ settings:
     force: false
     interval: 0s
 schema:
-- name: QuestionBox
-  path: /go/src/github.com/Amakuchisan/QuestionBox
+- name: QuestionStore
+  path: /go/src/github.com/Amakuchisan/QuestionStore
   commands:
     install:
       status: true
-      method: go build -o /go/src/github.com/Amakuchisan/QuestionBox/bin/tts
+      method: go build -o /go/src/github.com/Amakuchisan/QuestionStore/bin/qs
     run:
       status: true
-      method: /go/src/github.com/Amakuchisan/QuestionBox/bin/tts
+      method: /go/src/github.com/Amakuchisan/QuestionStore/bin/qs
   watcher:
     extensions:
     - go
