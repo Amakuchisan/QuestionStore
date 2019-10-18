@@ -2,7 +2,7 @@
 
 This is a bulletin board format Web application. Users post questions and comments on questions.
 
-[![CircleCI](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master.svg?style=svg)](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master)
+[![CircleCI](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master.svg?style=svg&circle-token=684da293d09fdd7e3ec93f8363c827f70ffae5b7)](https://circleci.com/gh/Amakuchisan/QuestionBox/tree/master)
 
 ## Overview
 
