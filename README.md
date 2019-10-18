@@ -8,7 +8,7 @@ This is a bulletin board format Web application. Users post questions and commen
 
 - Login with OAuth2 with Google
 - Post questions
-- Post comments on questions
+- Reply to questions
 
 ## Dependencies
 
@@ -36,11 +36,9 @@ $ ./bin/tts
 $ docker-compose up -d
 ```
 
-**Execute SQL**
-```
-$ docker-compose exec db mysql -h localhost -u tts -p tts
-```
-
 ## Future work
 
-- Use Nginx
+- Email Notification
+- Export static file (Nginx delivery)
+- Testing
+- UI improvements
