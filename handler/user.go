@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/Amakuchisan/QuestionBox/model"
+	"github.com/Amakuchisan/QuestionStore/model"
 	"github.com/labstack/echo"
 	"net/http"
 )

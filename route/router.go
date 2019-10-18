@@ -2,9 +2,9 @@ package route
 
 import (
 	"errors"
-	"github.com/Amakuchisan/QuestionBox/database"
-	"github.com/Amakuchisan/QuestionBox/handler"
-	"github.com/Amakuchisan/QuestionBox/repository"
+	"github.com/Amakuchisan/QuestionStore/database"
+	"github.com/Amakuchisan/QuestionStore/handler"
+	"github.com/Amakuchisan/QuestionStore/repository"
 	"github.com/labstack/echo"
 	"html/template"
 	"io"
