@@ -24,3 +24,9 @@ func (q *QuestionModel) All() ([]model.Question, error) {
 	}
 	return questions, nil
 }
+
+// CreateQuestion -- Insert question data
+func (q *QuestionModel) CreateQuestion(question *model.Question) error {
+	_, err := q.db.Exec(`INSERT INTO question (title, body, user_id) VALUES (?, ?, ?)`, question.Title, question.Body, question.UID)
+	return err
+}

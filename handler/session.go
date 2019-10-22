@@ -64,8 +64,14 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		}
 	}
 
+	data, err := u.userModel.FindByEmail(user.Email())
+	if err != nil {
+		return err
+	}
+
 	authCookieValue := objx.New(map[string]interface{}{
 		"name": user.Name(),
+		"id":   data.ID,
 	}).MustBase64()
 
 	cookie := &http.Cookie{
