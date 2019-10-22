@@ -1,0 +1,18 @@
+{{define "title"}}
+    CreateQuestion
+{{end}}
+
+{{define "content"}}
+    <h2>Hello, {{index . "name"}}</h2>
+    <form action="/questions" method="POST">
+        <label for="subject">件名</label>
+        <p>
+            <textarea id="subject" name="subject" cols="80" placeholder="件名を入力してください" required></textarea>
+        </p>
+        <label for="question" >質問</label>
+        <p>
+            <textarea id="question" name="question" cols="80" rows="20" maxlength="10000" placeholder="質問を記述してください" required></textarea>
+        </p>
+        <input type="submit" id="submit_btn" value="送信">
+    </form>
+{{end}}

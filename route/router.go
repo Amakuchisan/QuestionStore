@@ -34,11 +34,13 @@ func Init() *echo.Echo {
 	templates := make(map[string]*template.Template)
 	templates["index.html"] = makeTemplate("index.html")
 	templates["question.html"] = makeTemplate("question.html")
+	templates["form.html"] = makeTemplate("form.html")
 	e.Renderer = &TemplateRegistry{
 		templates: templates,
 	}
 
 	e.GET("/", handler.MainPage)
+	e.GET("/questions/form", handler.QuestionFormHandler)
 	e.GET("/auth/login/:provider", handler.LoginHandler)
 
 	userHandler := handler.NewUserHandler(repository.NewUserModel(database.DB))
@@ -47,7 +49,8 @@ func Init() *echo.Echo {
 	// e.GET("/users/:id", userHandler.DetailUser)
 	// e.DELETE("/users/:id", userHandler.DeleteUser)
 	questionHandler := handler.NewQuestionHandler(repository.NewQuestionModel(database.DB))
-	e.GET("/questions", questionHandler.QuestionsPage)
+	e.POST("/questions", questionHandler.PostQuestion)
+	e.GET("/questions", questionHandler.QuestionsTitleList)
 
 	return e
 }
