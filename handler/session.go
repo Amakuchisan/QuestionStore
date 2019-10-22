@@ -1,14 +1,15 @@
 package handler
 
 import (
-	"github.com/Amakuchisan/QuestionStore/model"
-	"github.com/labstack/echo"
-	"github.com/stretchr/gomniauth"
-	"github.com/stretchr/objx"
 	"net/http"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/Amakuchisan/QuestionStore/model"
+	"github.com/labstack/echo"
+	"github.com/stretchr/gomniauth"
+	"github.com/stretchr/objx"
 )
 
 // LoginHandler -- Login to each provider

@@ -2,13 +2,14 @@ package route
 
 import (
 	"errors"
+	"html/template"
+	"io"
+	"path/filepath"
+
 	"github.com/Amakuchisan/QuestionStore/database"
 	"github.com/Amakuchisan/QuestionStore/handler"
 	"github.com/Amakuchisan/QuestionStore/repository"
 	"github.com/labstack/echo"
-	"html/template"
-	"io"
-	"path/filepath"
 )
 
 // TemplateRegistry -- This have all templates

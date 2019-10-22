@@ -2,6 +2,7 @@ package database
 
 import (
 	"log"
+
 	// MySQL Driver
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
