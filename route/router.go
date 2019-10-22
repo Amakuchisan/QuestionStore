@@ -40,7 +40,7 @@ func Init() *echo.Echo {
 	}
 
 	e.GET("/", handler.MainPage)
-	e.GET("/ask", handler.AskPage)
+	e.GET("/questions/form", handler.QuestionFormHandler)
 	e.GET("/auth/login/:provider", handler.LoginHandler)
 
 	userHandler := handler.NewUserHandler(repository.NewUserModel(database.DB))
@@ -49,7 +49,7 @@ func Init() *echo.Echo {
 	// e.GET("/users/:id", userHandler.DetailUser)
 	// e.DELETE("/users/:id", userHandler.DeleteUser)
 	questionHandler := handler.NewQuestionHandler(repository.NewQuestionModel(database.DB))
-	e.POST("/api/post/ask", questionHandler.PostQuestion)
+	e.POST("/questions", questionHandler.PostQuestion)
 	e.GET("/questions", questionHandler.QuestionsTitleList)
 
 	return e

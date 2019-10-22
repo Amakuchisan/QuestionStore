@@ -4,7 +4,7 @@
 
 {{define "content"}}
     <h2>Hello, {{index . "name"}}</h2>
-    <form action="/api/post/ask" method="POST">
+    <form action="/questions" method="POST">
         <label for="subject">件名</label>
         <p>
             <textarea id="subject" name="subject" cols="80" placeholder="件名を入力してください" required></textarea>
