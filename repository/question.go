@@ -22,6 +22,7 @@ func (q *QuestionModel) All() ([]model.Question, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return questions, nil
 }
 

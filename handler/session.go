@@ -18,14 +18,15 @@ func LoginHandler(c echo.Context) error {
 	if err != nil {
 		return err
 	}
+
 	state := gomniauth.NewState("after", "success")
 	authURL, err := provider.GetBeginAuthURL(state, nil)
 
 	if err != nil {
 		return err
 	}
-	return c.Redirect(http.StatusMovedPermanently, authURL)
 
+	return c.Redirect(http.StatusMovedPermanently, authURL)
 }
 
 // CallbackHandler -- Provider called this handler after login

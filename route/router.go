@@ -24,6 +24,7 @@ func (t *TemplateRegistry) Render(w io.Writer, name string, data interface{}, c 
 		err := errors.New("Template not found -> " + name)
 		return err
 	}
+
 	return tmpl.ExecuteTemplate(w, "layout.html", data)
 }
 

@@ -22,6 +22,7 @@ func (u *UserModel) All() ([]model.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return users, nil
 }
 
