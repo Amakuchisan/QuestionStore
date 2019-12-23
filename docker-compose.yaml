@@ -28,8 +28,8 @@ services:
       MYSQL_USER: qs
       MYSQL_PASSWORD: qs
       MYSQL_DATABASE: qs
-    ports:
-       - "3306:3306"
+    expose:
+       - "3306"
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
