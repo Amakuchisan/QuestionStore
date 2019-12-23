@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE users (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     email VARCHAR(256) NOT NULL UNIQUE,
     name VARCHAR(32),
@@ -7,7 +7,7 @@ CREATE TABLE user (
     deleted_at TIMESTAMP DEFAULT NULL
 );
 
-CREATE TABLE question (
+CREATE TABLE questions (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     title TEXT,
     body TEXT,
@@ -18,9 +18,9 @@ CREATE TABLE question (
 );
 
 -- 初期データ
-INSERT INTO user (email, name) VALUES ("hoge@hogehoge", "hoge");
-INSERT INTO user (email, name) VALUES ("fuga@fugafuga", "foo");
-INSERT INTO user (email, name) VALUES ("piyo@piyopiyo", "bar");
+INSERT INTO users (email, name) VALUES ("hoge@hogehoge", "hoge");
+INSERT INTO users (email, name) VALUES ("fuga@fugafuga", "foo");
+INSERT INTO users (email, name) VALUES ("piyo@piyopiyo", "bar");
 
-INSERT INTO question (title, body, user_id) VALUES ("How to use Git?", "What is 'git init?'", 1);
-INSERT INTO question (title, body, user_id) VALUES ("How to use Docker?", "What is 'docker-compose?'", 2);
+INSERT INTO questions (title, body, user_id) VALUES ("How to use Git?", "What is 'git init?'", 1);
+INSERT INTO questions (title, body, user_id) VALUES ("How to use Docker?", "What is 'docker-compose?'", 2);

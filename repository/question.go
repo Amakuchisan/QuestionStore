@@ -18,7 +18,7 @@ func NewQuestionModel(db *sqlx.DB) *QuestionModel {
 // All -- SELECT * FROM questions
 func (q *QuestionModel) All() ([]model.Question, error) {
 	questions := []model.Question{}
-	err := q.db.Select(&questions, "SELECT * from question")
+	err := q.db.Select(&questions, "SELECT * from questions")
 	if err != nil {
 		return nil, err
 	}
@@ -28,6 +28,6 @@ func (q *QuestionModel) All() ([]model.Question, error) {
 
 // CreateQuestion -- Insert question data
 func (q *QuestionModel) CreateQuestion(question *model.Question) error {
-	_, err := q.db.Exec(`INSERT INTO question (title, body, user_id) VALUES (?, ?, ?)`, question.Title, question.Body, question.UID)
+	_, err := q.db.Exec(`INSERT INTO questions (title, body, user_id) VALUES (?, ?, ?)`, question.Title, question.Body, question.UID)
 	return err
 }
