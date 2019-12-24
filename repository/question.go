@@ -5,7 +5,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-// QuestionModel -- have method about user table in database
+// QuestionModel -- have method about question table in database
 type QuestionModel struct {
 	db *sqlx.DB
 }
