@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"time"
@@ -52,6 +53,11 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 	}
 
 	if !isAuthorizedDomain(user.Email()) {
+		accessToken := creds.Get("access_token").Str()
+		_, err := revokeToken(accessToken)
+		if err != nil {
+			return err
+		}
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
@@ -89,4 +95,18 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 
 func isAuthorizedDomain(email string) bool {
 	return strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
+}
+
+func revokeToken(accessToken string) (resp *http.Response, err error) {
+	googleRevokeURL := "https://accounts.google.com/o/oauth2/revoke"
+	u, err := url.Parse(googleRevokeURL)
+	if err != nil {
+		return nil, err
+	}
+	q := u.Query()
+	q.Set("token", accessToken)
+	u.RawQuery = q.Encode()
+	resp, err = http.Get(u.String())
+
+	return resp, err
 }
