@@ -1,9 +1,10 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo"
 	"github.com/stretchr/objx"
-	"net/http"
 )
 
 // MainPage -- top page
