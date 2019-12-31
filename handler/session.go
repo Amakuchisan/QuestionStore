@@ -98,7 +98,7 @@ func isAuthorizedDomain(email string) bool {
 }
 
 func revokeToken(accessToken string) (resp *http.Response, err error) {
-	googleRevokeURL := "https://accounts.google.com/o/oauth2/revoke"
+	const googleRevokeURL = "https://accounts.google.com/o/oauth2/revoke"
 	u, err := url.Parse(googleRevokeURL)
 	if err != nil {
 		return nil, err
