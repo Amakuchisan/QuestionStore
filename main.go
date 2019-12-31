@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
+
 	_ "github.com/Amakuchisan/QuestionStore/database"
 	"github.com/Amakuchisan/QuestionStore/route"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/middleware"
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/gomniauth/providers/google"
-	"log"
-	"os"
 )
 
 func main() {
