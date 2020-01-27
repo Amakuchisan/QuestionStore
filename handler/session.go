@@ -58,6 +58,7 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		if err != nil {
 			return err
 		}
+
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
@@ -70,6 +71,7 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		if err != nil {
 			return err
 		}
+
 	}
 
 	data, err := u.userModel.FindByEmail(user.Email())
@@ -103,6 +105,7 @@ func revokeToken(accessToken string) (resp *http.Response, err error) {
 	if err != nil {
 		return nil, err
 	}
+
 	q := u.Query()
 	q.Set("token", accessToken)
 	u.RawQuery = q.Encode()
