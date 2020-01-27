@@ -27,7 +27,7 @@ func LoginHandler(c echo.Context) error {
 		return err
 	}
 
-	return c.Redirect(http.StatusMovedPermanently, authURL)
+	return c.Redirect(http.StatusTemporaryRedirect, authURL)
 }
 
 // CallbackHandler -- Provider called this handler after login
