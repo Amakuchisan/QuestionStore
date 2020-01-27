@@ -92,7 +92,7 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 	}
 	c.SetCookie(cookie)
 
-	return c.Redirect(http.StatusMovedPermanently, "/")
+	return c.Redirect(http.StatusTemporaryRedirect, "/")
 }
 
 func isAuthorizedDomain(email string) bool {
