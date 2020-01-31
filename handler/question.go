@@ -31,8 +31,7 @@ func NewQuestionHandler(questionModel model.QuestionModelImpl) QuestionHandleImp
 func QuestionFormHandler(c echo.Context) error {
 	auth, err := c.Cookie("auth")
 	if err != nil {
-		return c.Redirect(http.StatusSeeOther, "/auth/login/google")
-
+		return err
 	}
 	userData := objx.MustFromBase64(auth.Value)
 
@@ -43,12 +42,6 @@ func QuestionFormHandler(c echo.Context) error {
 
 // QuestionsTitleList -- list questions
 func (q *questionHandler) QuestionsTitleList(c echo.Context) error {
-	// This function check whether cookie exist.
-	_, err := c.Cookie("auth")
-	if err != nil {
-		return c.Redirect(http.StatusSeeOther, "/auth/login/google")
-	}
-
 	questions, err := q.questionModel.All()
 	if err != nil {
 		return err
