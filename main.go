@@ -21,8 +21,8 @@ func authCheckMiddleware() echo.MiddlewareFunc {
 			const googleLoginPath = "/auth/login/google"
 			const googleCallbackPath = "/auth/callback/google"
 			_, err := c.Cookie("auth")
-			path := c.Request().URL.Path
 			if err != nil {
+				path := c.Request().URL.Path
 				if !(path == googleLoginPath || path == googleCallbackPath) {
 					return c.Redirect(http.StatusTemporaryRedirect, googleLoginPath)
 				}
