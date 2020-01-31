@@ -18,12 +18,13 @@ import (
 func authCheckMiddleware() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-
+			const googleLoginPath = "/auth/login/google"
+			const googleCallbackPath = "/auth/callback/google"
 			_, err := c.Cookie("auth")
 			path := c.Request().URL.Path
 			if err != nil {
-				if !(path == "/auth/login/google" || path == "/auth/callback/google") {
-					return c.Redirect(http.StatusSeeOther, "/auth/login/google")
+				if !(path == googleLoginPath || path == googleCallbackPath) {
+					return c.Redirect(http.StatusTemporaryRedirect, googleLoginPath)
 				}
 			}
 
