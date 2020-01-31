@@ -16,7 +16,7 @@ import (
 )
 
 func authCheckMiddleware() echo.MiddlewareFunc {
-	return func (next echo.HandlerFunc) echo.HandlerFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 
 			_, err := c.Cookie("auth")
