@@ -17,6 +17,7 @@ type (
 	// QuestionHandleImplement -- Define handler about questions
 	QuestionHandleImplement interface {
 		// QuestionAll(c echo.Context) error
+		Question(c echo.Context) error
 		QuestionsTitleList(c echo.Context) error
 		PostQuestion(c echo.Context) error
 	}
@@ -39,6 +40,27 @@ func QuestionFormHandler(c echo.Context) error {
 	return c.Render(http.StatusOK, "form", map[string]interface{}{
 		"title": "CreateQuestion",
 		"name": userData["name"],
+	})
+}
+
+// Question -- show question
+func (q *questionHandler) Question(c echo.Context) error {
+	param := c.Param("id")
+	id, err := strconv.ParseUint(param, 10, 64)
+
+	if err != nil {
+		return err
+	}
+
+	question, err := q.questionModel.GetQuestion(id)
+	if err != nil {
+		return err
+	}
+	fmt.Println(question)
+
+	return c.Render(http.StatusOK, "quest", map[string]interface{}{
+		"title": "Question",
+		"question": question,
 	})
 }
 
