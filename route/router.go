@@ -1,10 +1,8 @@
 package route
 
 import (
-	"errors"
 	"html/template"
 	"io"
-	"path/filepath"
 
 	"github.com/Amakuchisan/QuestionStore/database"
 	"github.com/Amakuchisan/QuestionStore/handler"
@@ -12,20 +10,14 @@ import (
 	"github.com/labstack/echo"
 )
 
-// TemplateRegistry -- This have all templates
-type TemplateRegistry struct {
-	templates map[string]*template.Template
+// TemplateRenderer -- custom html/template renderer for Echo framework
+type TemplateRenderer struct {
+	templates *template.Template
 }
 
 // Render -- Rendering templates
-func (t *TemplateRegistry) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	tmpl, ok := t.templates[name]
-	if !ok {
-		err := errors.New("Template not found -> " + name)
-		return err
-	}
-
-	return tmpl.ExecuteTemplate(w, "layout.html", data)
+func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
 }
 
 // Init : routerの初期化
@@ -33,13 +25,10 @@ func Init() *echo.Echo {
 	e := echo.New()
 	e.Debug = true
 
-	templates := make(map[string]*template.Template)
-	templates["index.html"] = makeTemplate("index.html")
-	templates["question.html"] = makeTemplate("question.html")
-	templates["form.html"] = makeTemplate("form.html")
-	e.Renderer = &TemplateRegistry{
-		templates: templates,
+	renderer := &TemplateRenderer{
+		templates: template.Must(template.ParseGlob("templates/*.html")),
 	}
+	e.Renderer = renderer
 
 	e.GET("/", handler.MainPage)
 	e.GET("/questions/form", handler.QuestionFormHandler)
@@ -55,14 +44,4 @@ func Init() *echo.Echo {
 	e.GET("/questions", questionHandler.QuestionsTitleList)
 
 	return e
-}
-
-const (
-	baseTemplate = "templates/layout.html"
-	templatesDir = "templates"
-)
-
-func makeTemplate(html string) *template.Template {
-	templateFile := filepath.Join(templatesDir, html)
-	return template.Must(template.ParseFiles(baseTemplate, templateFile))
 }

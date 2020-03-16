@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-
-<html lang="ja">
-	<head>
-		<meta charset = "UTF-8">
-		<title>{{ template "title" . }} / QuestionStore</title>
-		<link rel="stylesheet" href="/static/css/styles.css">
-	</head>
-	<body>
-	{{ template "content" . }}
-	</body>
-</html>
+{{define "base"}}
+	<title> {{ .title }} / QuestionStore </title>
+	<link rel="stylesheet" href="/static/css/styles.css">
+{{end}}

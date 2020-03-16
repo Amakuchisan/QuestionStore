@@ -36,7 +36,8 @@ func QuestionFormHandler(c echo.Context) error {
 	}
 	userData := objx.MustFromBase64(auth.Value)
 
-	return c.Render(http.StatusOK, "form.html", map[string]interface{}{
+	return c.Render(http.StatusOK, "form", map[string]interface{}{
+		"title": "CreateQuestion",
 		"name": userData["name"],
 	})
 }
@@ -54,7 +55,8 @@ func (q *questionHandler) QuestionsTitleList(c echo.Context) error {
 		return err
 	}
 
-	return c.Render(http.StatusOK, "question.html", map[string]interface{}{
+	return c.Render(http.StatusOK, "question", map[string]interface{}{
+		"title": "Question",
 		"question": questions,
 	})
 }
