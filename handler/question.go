@@ -42,7 +42,7 @@ func QuestionFormHandler(c echo.Context) error {
 	})
 }
 
-// Question -- show question
+// QuestionDetail -- show question
 func (q *questionHandler) QuestionDetail(c echo.Context) error {
 	param := c.Param("id")
 	id, err := strconv.ParseUint(param, 10, 64)
