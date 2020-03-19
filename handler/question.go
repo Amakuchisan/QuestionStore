@@ -57,7 +57,7 @@ func (q *questionHandler) QuestionDetail(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "quest", map[string]interface{}{
-		"title": "Question",
+		"title": question.Title,
 		"question": question,
 	})
 }
