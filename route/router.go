@@ -42,7 +42,7 @@ func Init() *echo.Echo {
 	questionHandler := handler.NewQuestionHandler(repository.NewQuestionModel(database.DB))
 	e.POST("/questions", questionHandler.PostQuestion)
 	e.GET("/questions", questionHandler.QuestionsTitleList)
-	e.GET("/questions/:id", questionHandler.Question)
+	e.GET("/questions/:id", questionHandler.QuestionDetail)
 
 	return e
 }
