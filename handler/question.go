@@ -55,7 +55,6 @@ func (q *questionHandler) QuestionDetail(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(question)
 
 	return c.Render(http.StatusOK, "quest", map[string]interface{}{
 		"title": "Question",
