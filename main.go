@@ -23,6 +23,7 @@ func main() {
 
 	e := route.Init()
 	e.Use(middleware.Logger())
+	e.Pre(middleware.RemoveTrailingSlash())
 	e.Static("/static", "static")
 
 	host := os.Getenv("QS_HOST")
