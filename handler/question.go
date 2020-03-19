@@ -51,7 +51,7 @@ func (q *questionHandler) QuestionDetail(c echo.Context) error {
 		return err
 	}
 
-	question, err := q.questionModel.GetQuestion(id)
+	question, err := q.questionModel.FindByID(id)
 	if err != nil {
 		return err
 	}
@@ -108,7 +108,7 @@ func (q *questionHandler) PostQuestion(c echo.Context) error {
 
 	question := model.Question{Title: subject, Body: body, UID: uid}
 
-	err = q.questionModel.CreateQuestion(&question)
+	err = q.questionModel.Create(&question)
 	if err != nil {
 		return err
 	}

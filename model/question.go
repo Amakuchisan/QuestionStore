@@ -18,6 +18,6 @@ type Question struct {
 // QuestionModelImpl -- Define database control methods about question
 type QuestionModelImpl interface {
 	All() ([]Question, error)
-	GetQuestion(id uint64) (*Question, error)
-	CreateQuestion(question *Question) error
+	FindByID(id uint64) (*Question, error)
+	Create(question *Question) error
 }

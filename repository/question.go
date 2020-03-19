@@ -26,16 +26,16 @@ func (q *QuestionModel) All() ([]model.Question, error) {
 	return questions, nil
 }
 
-// GetQuestion -- Get question data
-func (q *QuestionModel) GetQuestion(id uint64) (*model.Question, error) {
+// FindByID -- Find question data in database
+func (q *QuestionModel) FindByID(id uint64) (*model.Question, error) {
 	question := model.Question{}
 	err := q.db.Get(&question, "SELECT * FROM questions WHERE id = ? LIMIT 1", id)
 
 	return &question, err
 }
 
-// CreateQuestion -- Insert question data
-func (q *QuestionModel) CreateQuestion(question *model.Question) error {
+// Create -- Insert question data
+func (q *QuestionModel) Create(question *model.Question) error {
 	_, err := q.db.Exec(`INSERT INTO questions (title, body, user_id) VALUES (?, ?, ?)`, question.Title, question.Body, question.UID)
 	return err
 }
