@@ -17,6 +17,6 @@ func MainPage(c echo.Context) error {
 
 	return c.Render(http.StatusOK, "main", map[string]interface{}{
 		"title": "TopPage",
-		"name": userData["name"],
+		"name":  userData["name"],
 	})
 }

@@ -38,7 +38,7 @@ func QuestionFormHandler(c echo.Context) error {
 
 	return c.Render(http.StatusOK, "form", map[string]interface{}{
 		"title": "CreateQuestion",
-		"name": userData["name"],
+		"name":  userData["name"],
 	})
 }
 
@@ -57,7 +57,7 @@ func (q *questionHandler) QuestionDetail(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "quest", map[string]interface{}{
-		"title": question.Title,
+		"title":    question.Title,
 		"question": question,
 	})
 }
@@ -76,7 +76,7 @@ func (q *questionHandler) QuestionsTitleList(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "question", map[string]interface{}{
-		"title": "Question",
+		"title":    "Question",
 		"question": questions,
 	})
 }
