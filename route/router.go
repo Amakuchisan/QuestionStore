@@ -1,13 +1,20 @@
 package route
 
 import (
+	"fmt"
 	"html/template"
 	"io"
+	"log"
+	"os"
 
 	"github.com/Amakuchisan/QuestionStore/database"
 	"github.com/Amakuchisan/QuestionStore/handler"
 	"github.com/Amakuchisan/QuestionStore/repository"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
+	"github.com/stretchr/gomniauth"
+	"github.com/stretchr/gomniauth/providers/google"
 )
 
 // TemplateRenderer -- custom html/template renderer for Echo framework
@@ -20,10 +27,21 @@ func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c 
 	return t.templates.ExecuteTemplate(w, name, data)
 }
 
-// Init : routerの初期化
-func Init() *echo.Echo {
+// Echo -- instance for initialization
+var Echo *echo.Echo
+
+func init() {
 	e := echo.New()
 	e.Debug = true
+
+	err := setupOAuth()
+
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	e.Use(middleware.Logger())
+	e.Static("/static", "static")
 
 	renderer := &TemplateRenderer{
 		templates: template.Must(template.ParseGlob("templates/*.html")),
@@ -44,5 +62,28 @@ func Init() *echo.Echo {
 	e.GET("/questions", questionHandler.QuestionsTitleList)
 	e.GET("/questions/:id", questionHandler.QuestionDetail)
 
-	return e
+	Echo = e
+}
+
+func setupOAuth() error {
+	if os.Getenv("QS_ENV") == "development" {
+		err := godotenv.Load()
+		if err != nil {
+			return err
+		}
+	}
+
+	host := os.Getenv("QS_HOST")
+	googleCallbackURL := fmt.Sprintf("http://%s/auth/callback/google", host)
+
+	// setup gomniauth
+	gomniauth.SetSecurityKey(os.Getenv("SECURITY_KEY"))
+	gomniauth.WithProviders(
+		google.New(
+			os.Getenv("GOOGLE_CLIENT_ID"),
+			os.Getenv("GOOGLE_CLIENT_SECRET"),
+			googleCallbackURL,
+		),
+	)
+	return nil
 }
