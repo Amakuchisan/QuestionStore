@@ -16,7 +16,7 @@ type (
 	}
 	// QuestionHandleImplement -- Define handler about questions
 	QuestionHandleImplement interface {
-		// QuestionAll(c echo.Context) error
+		QuestionDetail(c echo.Context) error
 		QuestionsTitleList(c echo.Context) error
 		PostQuestion(c echo.Context) error
 	}
@@ -35,8 +35,29 @@ func QuestionFormHandler(c echo.Context) error {
 	}
 	userData := objx.MustFromBase64(auth.Value)
 
-	return c.Render(http.StatusOK, "form.html", map[string]interface{}{
-		"name": userData["name"],
+	return c.Render(http.StatusOK, "form", map[string]interface{}{
+		"title": "CreateQuestion",
+		"name":  userData["name"],
+	})
+}
+
+// QuestionDetail -- show question
+func (q *questionHandler) QuestionDetail(c echo.Context) error {
+	param := c.Param("id")
+	id, err := strconv.ParseUint(param, 10, 64)
+
+	if err != nil {
+		return err
+	}
+
+	question, err := q.questionModel.FindByID(id)
+	if err != nil {
+		return err
+	}
+
+	return c.Render(http.StatusOK, "quest", map[string]interface{}{
+		"title":    question.Title,
+		"question": question,
 	})
 }
 
@@ -47,7 +68,8 @@ func (q *questionHandler) QuestionsTitleList(c echo.Context) error {
 		return err
 	}
 
-	return c.Render(http.StatusOK, "question.html", map[string]interface{}{
+	return c.Render(http.StatusOK, "question", map[string]interface{}{
+		"title":    "Question",
 		"question": questions,
 	})
 }
@@ -79,7 +101,7 @@ func (q *questionHandler) PostQuestion(c echo.Context) error {
 
 	question := model.Question{Title: subject, Body: body, UID: uid}
 
-	err = q.questionModel.CreateQuestion(&question)
+	err = q.questionModel.Create(&question)
 	if err != nil {
 		return err
 	}

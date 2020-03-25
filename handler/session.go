@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -27,7 +29,7 @@ func LoginHandler(c echo.Context) error {
 		return err
 	}
 
-	return c.Redirect(http.StatusMovedPermanently, authURL)
+	return c.Redirect(http.StatusTemporaryRedirect, authURL)
 }
 
 // CallbackHandler -- Provider called this handler after login
@@ -54,10 +56,11 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 
 	if !isAuthorizedDomain(user.Email()) {
 		accessToken := creds.Get("access_token").Str()
-		_, err := revokeToken(accessToken)
+		err := revokeToken(accessToken)
 		if err != nil {
 			return err
 		}
+
 		return echo.NewHTTPError(http.StatusUnauthorized, "Please provide valid credentials")
 	}
 
@@ -70,6 +73,7 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 		if err != nil {
 			return err
 		}
+
 	}
 
 	data, err := u.userModel.FindByEmail(user.Email())
@@ -90,23 +94,32 @@ func (u *userHandler) CallbackHandler(c echo.Context) error {
 	}
 	c.SetCookie(cookie)
 
-	return c.Redirect(http.StatusMovedPermanently, "/")
+	return c.Redirect(http.StatusTemporaryRedirect, "/")
 }
 
 func isAuthorizedDomain(email string) bool {
 	return strings.HasSuffix(email, os.Getenv("AUTHORIZED_DOMAIN"))
 }
 
-func revokeToken(accessToken string) (resp *http.Response, err error) {
+func revokeToken(accessToken string) error {
 	const googleRevokeURL = "https://accounts.google.com/o/oauth2/revoke"
 	u, err := url.Parse(googleRevokeURL)
 	if err != nil {
-		return nil, err
+		return err
 	}
+
 	q := u.Query()
 	q.Set("token", accessToken)
 	u.RawQuery = q.Encode()
-	resp, err = http.Get(u.String())
+	resp, err := http.Get(u.String())
+	if err != nil {
+		return err
+	}
 
-	return resp, err
+	defer func() {
+		io.Copy(ioutil.Discard, resp.Body)
+		resp.Body.Close()
+	}()
+
+	return err
 }

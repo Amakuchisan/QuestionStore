@@ -44,6 +44,7 @@ func main() {
 
 	e := route.Init()
 	e.Use(middleware.Logger())
+	e.Pre(middleware.RemoveTrailingSlash())
 	e.Static("/static", "static")
 	e.Use(authCheckMiddleware())
 
