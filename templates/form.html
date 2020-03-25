@@ -1,8 +1,5 @@
-{{define "title"}}
-    CreateQuestion
-{{end}}
-
-{{define "content"}}
+{{define "form"}}
+    {{template "base" .}}
     <h2>Hello, {{index . "name"}}</h2>
     <form action="/questions" method="POST">
         <label for="subject">件名</label>

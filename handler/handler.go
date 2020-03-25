@@ -15,7 +15,8 @@ func MainPage(c echo.Context) error {
 	}
 	userData := objx.MustFromBase64(auth.Value)
 
-	return c.Render(http.StatusOK, "index.html", map[string]interface{}{
-		"name": userData["name"],
+	return c.Render(http.StatusOK, "main", map[string]interface{}{
+		"title": "TopPage",
+		"name":  userData["name"],
 	})
 }

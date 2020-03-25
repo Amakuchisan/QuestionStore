@@ -1,11 +1,10 @@
-{{define "title"}}
-    Question
-{{end}}
+{{define "question"}}
+    {{template "base" .}}
 
-{{define "content"}}
     {{range .question}}
-    <p>
-    {{.Title}}
-    </p>
+        <p>
+            <a href="/questions/{{.ID}}">{{.Title}}</a>
+            <!-- <input action="/questions/{{.ID}}", type="button" value={{.Title}}> -->
+        </p>
     {{end}}
 {{end}}

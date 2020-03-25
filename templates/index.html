@@ -1,7 +1,5 @@
-{{define "title"}}
-TopPage
-{{end}}
+{{define "main"}}
+    {{template "base" .}}
 
-{{define "content"}}
-  <h2>Hello, {{index . "name"}}</h2>
+    <h2>Hello, {{.name}}</h2>
 {{end}}
