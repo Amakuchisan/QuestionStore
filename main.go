@@ -1,7 +1,7 @@
 package main
 
 import (
-	route "github.com/Amakuchisan/QuestionStore/route"
+	"github.com/Amakuchisan/QuestionStore/route"
 )
 
 func main() {
