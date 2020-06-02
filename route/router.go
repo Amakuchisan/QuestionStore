@@ -40,7 +40,7 @@ func init() {
 		log.Fatal("Error loading .env file")
 	}
 
-  g := e.Group("", authCheckMiddleware())
+	g := e.Group("", authCheckMiddleware())
 
 	e.Use(middleware.Logger())
 	e.Static("/static", "static")
