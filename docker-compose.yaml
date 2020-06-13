@@ -15,8 +15,6 @@ services:
       QS_ENV: development
     depends_on:
       - db
-    links:
-      - db
     volumes:
       - ./:/go/src/github.com/Amakuchisan/QuestionStore
 
@@ -28,8 +26,6 @@ services:
       MYSQL_USER: qs
       MYSQL_PASSWORD: qs
       MYSQL_DATABASE: qs
-    expose:
-       - "3306"
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
