@@ -12,8 +12,8 @@ import (
 	"github.com/Amakuchisan/QuestionStore/handler"
 	"github.com/Amakuchisan/QuestionStore/repository"
 	"github.com/joho/godotenv"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/gomniauth/providers/google"
 )
