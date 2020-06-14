@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/Amakuchisan/QuestionStore/model"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/stretchr/objx"
 )
 
