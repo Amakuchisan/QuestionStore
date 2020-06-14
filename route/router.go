@@ -43,6 +43,7 @@ func init() {
 	g := e.Group("", authCheckMiddleware())
 
 	e.Use(middleware.Logger())
+	// e.Pre(middleware.RemoveTrailingSlash())
 	e.Static("/static", "static")
 
 	renderer := &TemplateRenderer{
