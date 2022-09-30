@@ -7,7 +7,7 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/joho/godotenv v1.3.0
-	github.com/labstack/echo/v4 v4.1.16
+	github.com/labstack/echo/v4 v4.9.0
 	github.com/stretchr/codecs v0.0.0-20170403063245-04a5b1e1910d // indirect
 	github.com/stretchr/gomniauth v0.0.0-20170717123514-4b6c822be2eb
 	github.com/stretchr/objx v0.2.0
@@ -16,4 +16,5 @@ require (
 	github.com/stretchr/tracer v0.0.0-20140124184152-66d3696bba97 // indirect
 	github.com/ugorji/go v1.1.7 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 // indirect
+	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
